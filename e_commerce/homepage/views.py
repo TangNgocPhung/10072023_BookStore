@@ -68,12 +68,14 @@ def cart(request, gmail):
 def AddQuantityBook(request, idproduct, name, gmail):
     product = Product.objects.get(id = idproduct)
     user = UserID.objects.get(gmail = gmail)
-    order = Order.objects.get(customer = user)
-    items = order.orderitem_set.all()
-    print(items.count())
+    order = Order.objects.get(complete = False, customer = user)
+    print('Order',order)
+    #order = Order.objects.get(customer = user)
+    order_items = OrderItem.objects.filter(order = order)
+    print(order_items.count())
     print('Product', product)
     flag = False
-    for item in items:
+    for item in order_items:
         print('item', item)
         if item.product == product:         
             item.quantity +=1
@@ -85,5 +87,26 @@ def AddQuantityBook(request, idproduct, name, gmail):
         order_item.save()
     return redirect('homepage:home', name, gmail)
 
-#def UpdateStatusPayment(request):
+def UpdateStatusPayment(request, idOrder):
+    order = Order.objects.get(id = idOrder)
+    order.complete = True
+    order.save()
+    context = { 'username' : order.customer.username, 'gmail': order.customer.gmail }
+    return redirect('homepage:home', order.customer.username, order.customer.gmail)
+    #return redirect('homepage:home', idOrder)
     
+def OrderHistory(request, idOrders, gmail):
+    user = UserID.objects.get(gmail = gmail)
+    orders = Order.objects.filter(customer = user, complete = True)
+    #order = Order.objects.get(complete = True)
+    #print(items)
+    for order in orders:
+        item = order.orderitem_set.all()
+    username = UserID.objects.get(gmail = gmail)
+    context = {
+        'order': order,
+        'items': items,
+        'gmail' : gmail,
+        'username': username.username,
+    }
+    return render(request, 'homepage/HistoryOrder.html', context)

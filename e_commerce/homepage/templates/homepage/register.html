@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <title>Register</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Book Store</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a href="{% url 'homepage:index' %}">Home</a> </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="activate" ><a style="color: brown;" href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li><a href="{% url 'homepage:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+
+<body class="text-center">
+    <div class="container">
+    <form class="form-signin" method = "post" enctype="multipart/form-data">
+        {% csrf_token %}
+      <img class="mb-4" src="{% static 'homepage/images/background1.jpg' %}" alt="" width="180" height="180">
+      <h1 class="h3 mb-3 font-weight-normal">Dang ky</h1>
+      <input style="margin-bottom: 30px; margin-top: 30px;" name = "gmail" type="text" id="gmail" maxlength="100" class="form-control" placeholder="Gmail" required autofocus>
+      <input style="margin-bottom: 30px; margin-top: 30px;" name = "username" type="text" id="username" maxlength="100" class="form-control" placeholder="Username" required autofocus>
+      <input style = "margin-bottom: 30px;" type="password" id="password" name = "password1" class="form-control" placeholder="Password" required>
+      <input type="password" id="password" name = "password2" class="form-control" placeholder="Confirm password" required>
+      <button style="margin-top: 50px; margin-bottom:50px;" class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+      <p class="mt-5 mb-3 text-muted">@Copyright Tang Ngoc Phung</p>
+    </form>
+    </div> 
+</body>
+
+</html>
+

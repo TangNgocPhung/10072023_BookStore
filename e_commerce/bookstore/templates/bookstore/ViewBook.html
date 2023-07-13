@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+  <title>Bookstore</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="{% static 'bookstore/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="javascript:void(0)">Bookstore</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mynavbar">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="javascript:void(0)">Xin chào,  {{name}} </a>
+          </li>
+          <li class="nav-item">
+            <i class="fa-solid fa-right-from-bracket"style = "font-size: 24px; background-color: white" ></i>
+            <a class="nav-link" href="{% url 'homepage:logout' %}"> Logout </a>
+          </li>
+        </ul>
+    </div>
+  </div>
+  </nav> 
+  <div class="container" style="margin-top: 50px;">
+    <a style="margin-bottom: 50px;" href="{% url 'homepage:home' name gmail %}" class="btn btn-info">Go Back</a>
+
+    <div class="row" style="background-color: aliceblue;">
+      <div class="col-sm-4">
+        <img style="width:350px; max-height: auto;" src=" {{product.image.url}}" alt="">
+      </div>
+      <div class="col-sm-8">
+        <h4 style="color: red;"  class="product-description text-center"> <strong>{{product.name}} </strong> </h4>
+        <blockquote class="blockquote">
+          <p  style="font-size: 16px ;margin-top: 20px;text-align: justify;"> {{product.description}} </p>
+          <footer class="blockquote-footer">  {{product.author}}</footer>
+        </blockquote>
+        <div class="content">
+          <div class="block my-5">
+  
+            {% if product.is_pdf %}
+              <div class="badge bg-danger">PDF</div>
+            {% endif %}
+            
+            {% if product.is_physical %}
+              <div class="badge bg-success">PHYSICAL</div>
+            {% endif %}
+              
+              {% if product.is_ebook %}
+                <div class="badge bg-warning">EBOOK</div>
+              {% endif %}
+                <h5 style="font-weight: bold; margin-top: 20px;">  ${{product.price}} </h5>
+              
+          </div>
+        </div>
+      </div>
+    </div>
+       
+    <div class="review" style="margin-top: 50px;"> 
+      {% for review in reviews %}
+      <div class="block" style="margin-bottom: 20px; background-color: beige;">
+        <div class="row" style="margin-bottom: 10px;" >
+          <div class="col-sm-1" >
+          {% load static %}
+          <img  style="width: 100px; height: auto;" src="{% static 'bookstore/images/user.png' %}" alt="">
+          </div>
+          <div class="col-sm-11" >
+            <h6 style="color: red;"><strong>{{review.user.username}}</strong></h6> 
+             <p> <i>   {{review.review}}</i> </p> 
+             {% comment %} <a href="{% url 'bookstore:ShowReview' review.id product.id name gmail %}"> <button onclick="review_modal.showModal()" class="btn btn-info">Sửa</button></a> {% endcomment %}
+             <a href="{% url 'bookstore:DeleteReview' review.id product.id name gmail %}" class="btn btn-danger">Xóa</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+  </div>
+  {% comment %} <dialog id="review_modalEdit" > {% endcomment %}
+    {% comment %} <form action="{% url 'bookstore:EditReview' review_show.id product.id name gmail %}" method = "POST"> {% endcomment %}
+      {% comment %} {% csrf_token %} {% endcomment %}
+      {% comment %} <div class="block" style="margin-bottom: 20px;"> {% endcomment %}
+        {% comment %} <label for="label review"><strong>REVIEW</strong></label> {% endcomment %}
+        {% comment %} <span id = "close-dialog-buttonEdit" style="float: right; cursor: pointer;"  onclick="closeDialogEdit()" class="glyphicon glyphicon-remove">Close</span> {% endcomment %}
+      {% comment %} </div> {% endcomment %}
+      {% comment %} <div class="block"> {% endcomment %}
+        {% comment %} <textarea name="review" id="" placeholder="Your Review....."  cols="60" rows="10" style="border: 2px dashed gray;" required autofocus>{{review_show.review}}</textarea> {% endcomment %}
+      {% comment %} </div> {% endcomment %}
+      {% comment %} <input type="submit" class="btn btn-success" value="Post"> {% endcomment %}
+    {% comment %} </form> {% endcomment %}
+  {% comment %} </dialog> {% endcomment %}
+  <dialog id="review_modal" >
+    <form action="{% url 'bookstore:AddReview' product.id name gmail %}" method = "POST">
+      {% csrf_token %}
+      <div class="block" style="margin-bottom: 20px;">
+        <label for="label review"><strong>REVIEW</strong></label>
+        <span id = "close-dialog-button" style="float: right; cursor: pointer;"  onclick="closeDialog()" class="glyphicon glyphicon-remove">Close</span>
+      </div>
+      <div class="block">
+        <textarea name="review" id="" placeholder="Your Review....."  cols="60" rows="10" style="border: 2px dashed gray;" required autofocus>
+        </textarea>
+      </div>
+      <input type="submit" class="btn btn-success" value="Post">
+    </form>
+  </dialog>
+  <button class="btn btn-warning" onclick="review_modal.showModal()">Post Review</button>
+</div>
+<div class="container-fluid">
+    <div class="panel-footer">
+        <h5 class="text-center">@Copyright Tang Ngoc Phung - 46.01.103.055 </h5>
+    </div>
+</div>
+<script>
+  var closeDialogButton = document.getElementById('close-dialog-button');
+  var myDialog = document.getElementById('review_modal');
+
+  closeDialogButton.addEventListener('click', function() {
+    myDialog.close();
+  });
+  var closeDialogButtonEdit = document.getElementById('close-dialog-buttonEdit');
+  var myDialogEdit = document.getElementById('review_modalEdit');
+  closeDialogButtonEdit.addEventListener('click', function() {
+    myDialogEdit.close();
+  });
+</script>
+</body>
+</html>

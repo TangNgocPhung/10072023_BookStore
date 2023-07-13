@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {%load static%}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Book</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="{% static 'bookstore/css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="javascript:void(0)">Bookstore</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavba
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="mynavbar">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="javascript:void(0)">Xin chào,  {{username}}  </a>
+              </li>
+              <li class="nav-item">
+                <i class="fa-solid fa-right-from-bracket"style = "font-size: 24px; background-color: white"> </i>
+                <a class="nav-link" href="{% url 'homepage:logout' %}"> Logout </a>
+              </li>
+            </ul>
+        </div>
+      </div>
+      </nav>
+      <div class="container">
+        <a style="margin-top: 40px;" href="{% url 'homepage:home' username %}" class="btn btn-dark">Go Back</a>
+        {% for item in  items %}
+        <div class="box">
+            <article class="media">
+                <div class="media-left">
+                    <figure class="image is-64x64">
+                        <img style="width: 100px; height: auto;" src="{{item.image.url}}" alt="">
+                    </figure>
+                </div>
+                <div class="media-content">
+                    <h4 class="product-description text-center"><strong>{{item.name}} </strong></h4>
+                    <p>Author: <i> {{item.author}}</i></p>
+                    <div class="card-user">
+                        {% if item.is_pdf %}
+                        <span class="badge bg-info">PDF</span>
+                    {% endif %}
+                    
+                    {% if item.is_physical %}
+                        <span class="badge bg-warning">PHYSICAL</span>
+                    {% endif %}
+                        
+                        {% if item.is_ebook %}
+                            <span class="badge bg-danger">EBOOK</span>
+                        {% endif %}
+                            
+                    </div>
+                    <hr size="3" color="#000000" style="dashed">
+                    <a style="display: inline-block;" href="{% url 'bookstore:ViewBook' item.id username %}" class="btn btn-success">View</a>   
+                    <h4 style="display: inline-block; float:right;" ><strong>${{item.price}} </strong></h4>         
+                </div>
+            </article>
+        </div>
+        {% endfor %}
+      </div> 
+        
+</body>
+</html>

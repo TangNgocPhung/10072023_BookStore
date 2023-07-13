@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <title>Login</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Book Store</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="{% url 'homepage:index'%}">Home</a> </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="{% url 'homepage:signup' %}"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li class="activate" style="color: blanchedalmond;"><a  style="color: brown;" href="{% url 'homepage:login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+    </ul>
+  </div>
+</nav>
+
+<body class="text-center">
+    <div class="container">
+    <form class="form-signin" method = "POST" enctype="multipart/form-data">
+        {% csrf_token %}
+      <img class="mb-4" src="{% static 'homepage/images/background1.jpg' %}" alt="" width="180" height="180">
+      <h1 class="h3 mb-3 font-weight-normal">Dang nhap</h1>
+      {% if message %}
+        {{message}}
+      {% endif %}
+      <input style="margin-bottom: 30px; margin-top: 100px;" name = "gmail" type="email" id="id_gmail" maxlength="100" class="form-control" placeholder="Gmail" required autofocus>
+      <input type="password" id="id_password" name = "password" class="form-control" placeholder="Password" required>
+      <button style="margin-top: 50px; margin-bottom:50px;" class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+      <p class="mt-5 mb-3 text-muted">@Copyright Tang Ngoc Phung</p>
+    </form>
+    </div> 
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static%}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Book</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'homeadmin/css/style.css' %}">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="jumbotron text-center" style="font-size: 40px; font-weight: bold;"> ADD BOOK</div>
+    <div style="background-color: aliceblue;" class="container">
+        <form  action="{% url 'homeadmin:add_book' gmail %}" method = "post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_name" class="control-label col-sm-2">Name</label>
+                <div class="col-sm-10"><input type="text" name="namebook" id="id_name" style="width: 100%; display: block; box-sizing: border-box;" class="responsive-input" autofocus> </div>
+            </div>
+            <div class="form-group">
+                <label for="id_author" class="control-label col-sm-2">Author</label>
+                <div class="col-sm-10"><input type="text" name="authorbook" id="id_author" style="width: 100%; display: block; box-sizing: border-box;" class="responsive-input"> </div>
+            </div>
+            <div class="form-group">
+                <label for="id_des" class="control-label col-sm-2">Description</label>
+                <div class="col-sm-10">
+                    <textarea type="text" name="description" id="id_description" style="width: 100%; display: block; box-sizing: border-box;" class = "responsive-input"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_price" class="control-label col-sm-2">Price</label>
+                <div class="col-sm-10">
+                    <input type="number" name="price" id="id_price">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_image" class="control-label col-sm-2">Image</label>
+                <div class="col-sm-10">
+                    <input type="file" name="image" id="id_image">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="id_pdf" class="control-label col-sm-2">PDF</label>
+                <div class="col-sm-5">
+                    <input type="radio" name="pdf" value="True" id="id_pdf"> PDF
+                </div>
+                <div class="col-sm-5">
+                    <input type="radio" name="pdf" value="False" id="id_pdf" "> NOT PDF
+                </div>
+            </div>
+            <>
+            <div class="form-group">
+                        <label for="id_physical" class="control-label col-sm-2 col-md-2">Physical</label>
+                   
+                    <div class="col-sm-5 col-md-5">
+                        <input type="radio" value="True" name="physical" id="id_physical"> PHYSICAL
+                    </div>
+                    <div class="col-sm-5 col-md-5">
+                        <input type="radio" value="False" name="physical" id="id_physical"> NOT PHYSICAL
+                    </div>
+                </div>
+                <>
+            <div class="form-group">
+                <label for="id_ebook" class="control-label col-sm-2">EBOOK</label>
+                <div class="col-sm-5">
+                    <input type="radio" name="ebook" value="True" id="id_ebook"> EBOOK
+                </div>
+                <div class="col-sm-5">
+                    <input type="radio" name="ebook" value="False" id="id_ebook"> NOT EBOOK
+                </div>
+            </div>
+            <button style="margin-top: 30px;" type="submit" class="btn btn-success">Add book</button>
+            <a style="margin-top: 30px; margin-left: 30px;" href="{% url 'homeadmin:homeadmin' gmail %}" class="btn btn-warning">Go Back</a>
+        </form>
+    </div>
+</body>
+</html>

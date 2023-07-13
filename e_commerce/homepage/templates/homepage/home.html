@@ -33,7 +33,7 @@
             {% comment %} <a class="nav-link" href="javascript:void(0)">Link</a> {% endcomment %}
           {% comment %} </li> {% endcomment %}
         </ul>
-        <form action="{% url 'homepage:search_book_user' username %}"  method="POST" class="d-flex">
+        <form action="{% url 'homepage:search_book_user' username gmail %}"  method="POST" class="d-flex">
           {% csrf_token %}
           <input class="form-control me-2" name = "search_query" type="text" placeholder="Search">
           <button class="btn btn-primary" type="submit">Search</button>

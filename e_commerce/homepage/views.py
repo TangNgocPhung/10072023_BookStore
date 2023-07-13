@@ -41,13 +41,14 @@ def MyLogin(request):
 def MyLogout(request):
     return render(request,'homepage/index.html')
 
-def SearchBook(request, username):
+def SearchBook(request, username, gmail):
     if request.method == 'POST':
         search_query = request.POST['search_query']
         items = Product.objects.filter(name__icontains=search_query)
         context = {
             'items': items,
-            'username': username
+            'username': username,
+            'gmail': gmail,
         }
         return render(request, 'homepage/SearchBookUser.html', context)
     return render(request,'homepage/home.html')

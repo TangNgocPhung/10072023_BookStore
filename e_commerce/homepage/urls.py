@@ -9,7 +9,7 @@ urlpatterns = [
     path('login/', views.MyLogin, name = 'login'),
     path('home/<str:name>/<str:gmail>', views.home, name = 'home'),
     path('logout/', views.MyLogout, name = 'logout'),
-    path('SearchBookUser/<str:username>', views.SearchBook, name = 'search_book_user'),
+    path('SearchBookUser/<str:username>/<str:gmail>', views.SearchBook, name = 'search_book_user'),
     path('Cart/<str:gmail>', views.cart, name = 'cart'),
     path('AddQuantityBook/<int:idproduct>/<str:name>/<str:gmail>', views.AddQuantityBook, name = 'add_quantity_book'),
 ]

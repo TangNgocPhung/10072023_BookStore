@@ -57,26 +57,14 @@
               {% if product.is_ebook %}
                 <div class="badge bg-warning">EBOOK</div>
               {% endif %}
-                <h5 style="font-weight: bold; margin-top: 20px;">  ${{product.price}} </h5>
-              
+                <h5 style="font-weight: bold; margin-top: 20px;">  ${{product.price}} </h5>   
           </div>
         </div>
       </div>
     </div>
-       
-    <div class="review" style="margin-top: 50px;">
-    <div class="row">
-      <div class="col-sm-1">
-        <img style="width: 100px; height: auto;" src="{% static 'homeadmin/images/user.jpg'%}" class="img-responsive" alt="">
-      </div>
-      <div class="col-sm-11">
-        {% for review in reviews %}
-        <h6 style="color: red;"><strong>{{review.user.username}}</strong></h6> 
-         <p> <i>   {{review.review}}</i> </p> 
-       {% endfor %}
-      </div>
+    <div class="review">
+      {% for review in  %}
     </div>
-  </div>
 </div>
 <div class="container-fluid">
     <div class="panel-footer">

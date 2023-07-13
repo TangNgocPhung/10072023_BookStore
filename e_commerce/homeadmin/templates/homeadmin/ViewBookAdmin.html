@@ -63,7 +63,21 @@
       </div>
     </div>
     <div class="review">
-      {% for review in  %}
+      {% for review in reviews %}
+        <div class="block" style="margin-bottom: 20px; background-color: beige;">
+          <div class="row" style="margin-bottom: 10px;">
+            <div class="col-sm-1">
+              {% load static%}
+              <img style="width: 100px; height: auto;" src="{% static 'homeadmin/images/user.jpg' %}" alt="">
+            </div>
+            <div class="col-sm-11">
+              <h6 style="color: red;"><strong> {{review.user.username}} </strong></h6>
+              <p> <i> {{review.review}} </i> </p>
+              <a href="{% url 'bookstore:DeleteReview' review.id product.id name gmail %}" class="btn btn-danger">Xóa</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
     </div>
 </div>
 <div class="container-fluid">

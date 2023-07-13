@@ -12,4 +12,6 @@ urlpatterns = [
     path('SearchBookUser/<str:username>/<str:gmail>', views.SearchBook, name = 'search_book_user'),
     path('Cart/<str:gmail>', views.cart, name = 'cart'),
     path('AddQuantityBook/<int:idproduct>/<str:name>/<str:gmail>', views.AddQuantityBook, name = 'add_quantity_book'),
+    path('UpdateStatusPayment/<int:idOrder>', views.UpdateStatusPayment, name = 'update_status_payment'),
+    path('OrderHistory/<int:idOrders>/<str:gmail>', views.OrderHistory , name = 'order_history'),
 ]

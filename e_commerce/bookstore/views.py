@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from bookstore.models import Product, Review
-from homepage.models import UserID
+from homepage.models import UserID,Permission
 # Create your views here.
 def ViewBook(request, id, username, gmail):
     product = Product.objects.get(id = id)
@@ -29,7 +29,15 @@ def AddReview(request, id, user, gmail):
 def DeleteReview(request, id, idpro, user, gmail):
    review_user = Review.objects.get(id=id)
    review_user.delete()
-   return redirect('bookstore:ViewBook', idpro, user, gmail)
+   user = UserID.objects.get(gmail=gmail)
+   per = Permission.objects.get(id=1)
+   # print(user)
+   # print(user.IDpermission)
+   if user.IDpermission == per:
+          print('YES')
+          return redirect ('homeadmin:view_book_admin',idpro,  gmail)
+   else:
+      return redirect('bookstore:ViewBook', idpro, user, gmail)
 
 
 def EditReview(request, id, idpro , user, gmail):
